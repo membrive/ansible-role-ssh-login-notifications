@@ -1,6 +1,5 @@
 # Ansible Role: SSH Login Notifications
 
-[![Build Status](https://travis-ci.org/membrive/ansible-role-ssh-login-notifications.svg?branch=master)](https://travis-ci.org/membrive/ansible-role-ssh-login-notifications)
 
 Installs scripts to send a notification (by mail and/or Slack) when an user logs in using SSH.
 
@@ -26,6 +25,12 @@ ssh_login_notifications_slack_enable: false
 
 # Set the Slack custom integration webhook URL
 ssh_login_notifications_slack_webhook: ""
+
+# Keep track of IPs that logged in and only report to slack if a new one logs in
+# NOTE: There isn't an email conterpart since normally you want your email log to be as detailed as possible
+# for better forensic analysis
+# Seen IPs' log is kept as a plaintext file under /var/log/ansible-ssh-login-notification.log
+ssh_login_notifications_slack_only_unique: true
 ```
 
 Notifications previously activated with this role can be deactivated by setting the variable to *false*. 
@@ -39,13 +44,23 @@ None
 ```
 - hosts: server
   roles:
-    - { role: membrive.ssh-login-notifications }
+    - { role: grzegorznowak.ansible_role_ssh_login_notifications }
 ```
 
 ## License
 
 MIT / BSD
 
+## Sponsored by
+
+#### [Kwiziq.com](https://www.kwiziq.com) - The AI language education platform
+#### [Spottmedia.com](http://www.spottmedia.com) - Technology design, delivery and consulting
+
+
 ## Author Information
 
-This role was created in 2017 by [Fernando Membrive](https://membrive.net).
+python, ansible, slack & shell coding by [Grzegorz Nowak](https://www.linkedin.com/in/grzegorz-nowak-356b7360/) and Spottmedia.
+
+
+the initial code was a fork from a work of:
+[Fernando Membrive](https://membrive.net).
